@@ -3,7 +3,6 @@ const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const nodemailer = require("nodemailer");// import nodemailer
-const port = 3009; // default port to listen
 
 
 let mail = nodemailer.createTransport({
@@ -37,7 +36,7 @@ app.post( "/sendMessage", async function( req, res ) {
 
     res.send(req.body);
 });
-
+let port = process.env.PORT || 3010
 // start the Express server
 app.listen( port, () => {
     console.log( `server started at http://localhost:${ port }` );

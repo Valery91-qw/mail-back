@@ -7,6 +7,10 @@ const nodemailer = require("nodemailer");// import nodemailer
 let smtp_login = process.env.SMTP_LOGIN || "..."
 let smtp_password = process.env.SMTP_PASSWORD || "..."
 
+app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
 let mail = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -15,9 +19,7 @@ let mail = nodemailer.createTransport({
     },
 });
 
-app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+
 
 // define a route handler for the default home page
 app.get( "/", ( req, res ) => {
@@ -36,7 +38,7 @@ app.post( "/sendMessage", async function( req, res ) {
 <div>message: ${message}</div>`
     });
 
-    res.send(req.body);
+    res.send("all ok");
 });
 let port = process.env.PORT || 3010
 // start the Express server

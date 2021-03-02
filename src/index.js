@@ -40,7 +40,7 @@ app.post( "/sendMessage", async function( req, res ) {
 
     res.send("all ok");
 });
-let port = process.env.PORT || 3010
+let port = process.env.PORT || 3009
 // start the Express server
 app.listen( port, () => {
     console.log( `server started at http://localhost:${ port }` );

@@ -4,12 +4,14 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const nodemailer = require("nodemailer");// import nodemailer
 
-let smtp_login = process.env.SMTP_LOGIN || "..."
-let smtp_password = process.env.SMTP_PASSWORD || "..."
-
-app.use(cors())
+app.use(cors({
+    origin: ['https://valery91-qw.github.io']
+}))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+let smtp_login = process.env.SMTP_LOGIN || "..."
+let smtp_password = process.env.SMTP_PASSWORD || "..."
 
 let mail = nodemailer.createTransport({
     service: "gmail",

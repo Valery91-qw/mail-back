@@ -1,13 +1,12 @@
 const cors = require('cors')
 const express = require( "express" );
 const app = express();
+
 app.use(cors())
 app.options('*', cors());
 
-
 const bodyParser = require('body-parser')
 const nodemailer = require("nodemailer");// import nodemailer
-
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -23,18 +22,12 @@ let mail = nodemailer.createTransport({
     },
 });
 
-app.all('*', function (req, res) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-})
-
 // define a route handler for the default home page
 app.get( "/", ( req, res ) => {
     res.send( "Hello world!" );
 } );
 
-app.post( "/sendMessage", async function( req, res ) {
+app.post( "/sendMessage" , async function( req, res ) {
 
     let {name, email, message} = req.body
     let info = await mail.sendMail({

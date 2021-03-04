@@ -1,20 +1,32 @@
 const express = require( "express" );
 const cors = require('cors')
 const app = express();
+let smtp_login = process.env.SMTP_LOGIN || "..."
+let smtp_password = process.env.SMTP_PASSWORD || "..."
+let port = process.env.PORT || 3009
 
-app.use(cors({
-    origin:' https://valery91-qw.github.io',
-    optionsSuccessStatus: 200
-}));
 
+app.use(cors());
 const bodyParser = require('body-parser')
 const nodemailer = require("nodemailer");// import nodemailer
+let allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' === req.method) {
+        res.send(200);
+    }
+    else {
+        next();
+    }
+};
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(allowCrossDomain);
 
-let smtp_login = process.env.SMTP_LOGIN || "..."
-let smtp_password = process.env.SMTP_PASSWORD || "..."
 
 let mail = nodemailer.createTransport({
     service: "gmail",
@@ -43,7 +55,6 @@ app.post( "/sendMessage" , async function( req, res ) {
 
     res.send("all ok");
 });
-let port = process.env.PORT || 3009
 // start the Express server
 app.listen( port, () => {
     console.log( `server started at http://localhost:${ port }` );

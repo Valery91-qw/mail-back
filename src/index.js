@@ -1,9 +1,11 @@
-const cors = require('cors')
 const express = require( "express" );
+const cors = require('cors')
 const app = express();
 
-app.use(cors())
-app.options('*', cors());
+app.use(cors({
+    origin:' https://valery91-qw.github.io',
+    optionsSuccessStatus: 200
+}));
 
 const bodyParser = require('body-parser')
 const nodemailer = require("nodemailer");// import nodemailer

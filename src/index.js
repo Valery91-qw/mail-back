@@ -31,6 +31,7 @@ app.use(allowCrossDomain);
 let mail = nodemailer.createTransport({
     service: "gmail",
     auth: {
+        type: "login",
         user: smtp_login, // generated ethereal user
         pass: smtp_password,  // generated ethereal password
     },

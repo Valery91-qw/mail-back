@@ -48,7 +48,7 @@ app.post( "/sendMessage" , async function( req, res ) {
     let {name, email, message} = req.body
     let info = await mail.sendMail({
         from: 'my profile page',
-        to: 'vakriv91@gmail.com',
+        to: 'valerykrvnk@gmail.com',
         subject: 'Sending Email via Node.js',
         html: `<div>name : ${name}</div>
 <div>email: ${email}</div>

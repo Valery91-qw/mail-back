@@ -1,8 +1,8 @@
 const express = require( "express" );
 const cors = require('cors')
 const app = express();
-let smtp_login = process.env.SMTP_LOGIN || "..."
-let smtp_password = process.env.SMTP_PASSWORD || "..."
+let SMTP_LOGIN = process.env.SMTP_LOGIN || "..."
+let SMTP_PASSWORD = process.env.SMTP_PASSWORD || "..."
 let port = process.env.PORT || 3009
 
 
@@ -32,8 +32,8 @@ let mail = nodemailer.createTransport({
     service: "gmail",
     auth: {
         type: "login",
-        user: smtp_login, // generated ethereal user
-        pass: smtp_password,  // generated ethereal password
+        user: SMTP_LOGIN, // generated ethereal user
+        pass: SMTP_PASSWORD,  // generated ethereal password
     },
 });
 

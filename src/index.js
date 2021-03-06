@@ -9,7 +9,6 @@ let port = process.env.PORT || 3009
 app.use(cors());
 const bodyParser = require('body-parser')
 const nodemailer = require("nodemailer");
-const nodeMailer = require("nodemailer");
 // import nodemailer
 let allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -30,7 +29,7 @@ app.use(bodyParser.json())
 app.use(allowCrossDomain);
 
 
-let mail = nodeMailer.createTransport({
+let mail = nodemailer.createTransport({
     service: "gmail",
     auth: {
         type: "login",
